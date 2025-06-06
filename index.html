@@ -1,562 +1,593 @@
-
 <!DOCTYPE html>
-<html dir="ltr">
-
-
-<!-- Mirrored from cashaprime24x7.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 07 Feb 2025 17:25:28 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8">
-
-<head><base  />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster - Play Games & Earn Money</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .ac_footer {
-            position: relative;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
             text-align: center;
-            overflow: hidden;
-            padding: 50px 0;
-            color: #A12000;
+            padding: 30px 0;
+            margin-bottom: 20px;
         }
-
-        .ac_footer a {
-            color: #A12000;
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
-
-        .ac_footer p {
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .game-container {
+            background: rgba(10, 15, 35, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-screen {
+            display: none;
+        }
+        
+        .active-screen {
+            display: block;
+        }
+        
+        .welcome-screen h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #FFD700;
             text-align: center;
         }
-
-        img[height="1"],
-        img[width="1"] {
-            display: none !important;
+        
+        .welcome-screen p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 48%;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 25px auto;
+            width: 250px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-earn {
+            background: linear-gradient(to right, #00cc66, #00b359);
+            box-shadow: 0 4px 15px rgba(0, 204, 102, 0.3);
+            width: 300px;
+        }
+        
+        .btn-earn:hover {
+            box-shadow: 0 6px 20px rgba(0, 204, 102, 0.5);
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .question-count, .score-container {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .score-container span {
+            color: #FFD700;
+            font-size: 1.3rem;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .option-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        
+        .option-btn.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+        }
+        
+        .option-btn.correct {
+            background: rgba(0, 204, 102, 0.3);
+            border-color: #00cc66;
+        }
+        
+        .option-btn.incorrect {
+            background: rgba(204, 0, 51, 0.3);
+            border-color: #cc0033;
+        }
+        
+        .result-screen {
+            text-align: center;
+        }
+        
+        .result-screen h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .final-score {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin: 30px 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .coins-earned {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .coins-earned i {
+            color: #FFD700;
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .coins-earned span {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+        
+        .earn-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .earn-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #00cc66;
+        }
+        
+        .earn-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .earn-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 48%;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .earn-option i {
+            font-size: 2rem;
+            color: #00cc66;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .features, .options-container, .earn-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature, .earn-option {
+                width: 100%;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
         }
     </style>
-
-
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" name="viewport">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title> Hammer of Thor - दुनिया का नं. 1 उत्पादक लिंग लंबा करने के लिए </title>
-    <link href="../hammercapsule.co.in/style.css" media="all" rel="stylesheet" type="text/css">
 </head>
-
-<body class="page">
-    <!--retarget-->
-
-    <!--retarget-->
-
-    <div class="page__wrapper js-wrapper">
-        <div class="header">
-            <div class="container">
-                <div class="header__inner">
-                    <div class="header__logo">
-                        <div class="logo"> Hammer of Thor </div>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">QuizMaster</div>
+            <div class="tagline">Test Your Knowledge & Earn Real Rewards!</div>
+        </header>
+        
+        <div class="game-container">
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="game-screen active-screen">
+                <div class="welcome-screen">
+                    <h2>Play Quiz Games & Win Real Money!</h2>
+                    <p>Challenge yourself with our trivia quizzes. For every correct answer, earn coins that you can convert to real cash rewards!</p>
+                    
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-coins"></i>
+                            <h3>Earn Real Money</h3>
+                            <p>Convert your quiz points to cash rewards</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-trophy"></i>
+                            <h3>Daily Challenges</h3>
+                            <p>Special bonuses for daily players</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-gift"></i>
+                            <h3>Referral Bonuses</h3>
+                            <p>Earn when you invite friends</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Instant Withdrawal</h3>
+                            <p>Get your money quickly via PayPal</p>
+                        </div>
                     </div>
-                    <div class="header__subtitle"> दुनिया का नं. 1 उत्पादक
-                        <span> लिंग </span> लंबा करने के लिए
-                    </div>
-                    <div class="header__title">
-                        <div class="header__title-big"> सबसे बड़ा,</div>
-                        <span> पहले </span> से कहीं बड़ा
-                    </div>
-                    <div class="package__sale12"> free
-                        <div class="package__text"> shipping </div>
-                    </div>
-                    <div class="header__right">
-                        <div class="header__timer">
-                            <div class="timer">
-                                <div class="timer__title"> ऑफर ख़त्म होने में शेष समय </div>
-                                <div class="timer__items js-timer"></div>
+                    
+                    <button id="start-btn" class="btn">Start Quiz Now!</button>
+                    
+                    <div class="earn-section">
+                        <h3>How to Earn Money</h3>
+                        <p>Play quizzes daily, complete challenges, and invite friends to maximize your earnings. Cash out anytime you reach $5!</p>
+                        
+                        <div class="earn-options">
+                            <div class="earn-option">
+                                <i class="fas fa-gamepad"></i>
+                                <h4>Play Games</h4>
+                                <p>Earn 10-50 coins per game</p>
+                            </div>
+                            <div class="earn-option">
+                                <i class="fas fa-user-plus"></i>
+                                <h4>Refer Friends</h4>
+                                <p>Get 200 coins per referral</p>
                             </div>
                         </div>
-                        <div class="header__package">
-                            <div class="package">
-                                <div class="package__sale-text">
-                                    <div class="sale"> अभी ऑर्डर करें
-                                        <span> और पाएँ </span>
-                                    </div>
-                                </div>
-                                <div class="package__image-wrapper">
-                                    <div class="package__sale"> 50%
-                                        <div class="package__text"> डिस्काउंट </div>
-                                    </div>
-                                    <div class="package__image"></div>
-                                    <div class="package__sale" style="  top: -35px; left:-35px; font-size: 0.9em;">
-                                        <!--<div class="package__text" style="font-size: 26px;
-    margin-top: 1px;"> फ्री
-                                        </div>
-                                         <img src="img/sticker.png" width="50px" alt=""> -->
-                                        <!--<div class="package__text" style="font-size: 1.6em;"> मसाज Oil
-                                        </div>-->
-                                    </div>
-                                    <!-- <img class="package__sale" style=" width: 200px;  top: -35px; left:-55px; background: no-repeat; " src="img/sticker.png"  alt=""> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header__price">
-                            <div class="price">
-                                <div class="price__inner">
-                                    <div class="price__items">
-                                        <div class="price__items-old">
-                                        </div>
-                                        <div class="price__items-new"> Pack of 20 Capsules
-                                        </div>
-                                    </div>
-                                    <div class="price__button">
-                                        <div class="button js-scroll-to"> <a style="text-decoration:none; color:#fff;"
-                                                href="javascript: scrollToForm();"> अभी ऑर्डर करें </a></div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--div class="price__items-new" ><a style="color:red;" href="tel:+91-8929013389">Call Now : 8929013389</a>
-</div-->
                     </div>
-                    <div class="header__advantages">
-                        <div class="header-advantages">
-                            <div class="header-advantages__item">
-                                <div class="header-advantages__item-icon-wrapper">
-                                    <div class="header-advantages__item-icon header-advantages__item-icon_increase">
-                                    </div>
-                                </div>
-                                <div class="header-advantages__item-title"> लिंग लंबा करें
-
-                                </div>
-                            </div>
-                            <div class="header-advantages__item">
-                                <div class="header-advantages__item-icon-wrapper">
-                                    <div class="header-advantages__item-icon header-advantages__item-icon_clock"></div>
-                                </div>
-                                <div class="header-advantages__item-title">
-                                    <span> लंबा चलने वाला </span> संभोग
-                                </div>
-                            </div>
-                            <div class="header-advantages__item">
-                                <div class="header-advantages__item-icon-wrapper">
-                                    <div class="header-advantages__item-icon header-advantages__item-icon_acute"></div>
-                                </div>
-                                <div class="header-advantages__item-title">
-                                    <span> बढ़ाएँ </span> संवेदनाओं को
-                                </div>
-                            </div>
-                            <div class="header-advantages__item">
-                                <div class="header-advantages__item-icon-wrapper">
-                                    <div class="header-advantages__item-icon header-advantages__item-icon_volume"></div>
-                                </div>
-                                <div class="header-advantages__item-title"> सेक्सी साइज़ </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="game-screen">
+                <div class="quiz-header">
+                    <div class="question-count">Question: <span id="question-number">1</span>/5</div>
+                    <div class="score-container">Score: <span id="score">0</span></div>
+                </div>
+                
+                <div class="question-text" id="question-text">
+                    Loading question...
+                </div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be added by JavaScript -->
+                </div>
+                
+                <button id="next-btn" class="btn">Next Question</button>
+            </div>
+            
+            <!-- Results Screen -->
+            <div id="result-screen" class="game-screen">
+                <div class="result-screen">
+                    <h2>Quiz Completed!</h2>
+                    <div class="final-score" id="final-score">0</div>
+                    
+                    <div class="coins-earned">
+                        <i class="fas fa-coins"></i>
+                        <div>You earned: <span id="coins-earned">0</span> coins</div>
+                    </div>
+                    
+                    <div class="earn-section">
+                        <h3>Cash Out Your Earnings!</h3>
+                        <p>You've earned coins that can be converted to real money. Keep playing to reach the $5 minimum withdrawal!</p>
+                        
+                        <button class="btn btn-earn">Withdraw via PayPal</button>
+                        <button class="btn">Play Another Quiz</button>
+                    </div>
+                    
+                    <div class="referral-section">
+                        <h3>Want to Earn More?</h3>
+                        <p>Invite friends and earn 200 coins for each referral when they sign up and complete their first quiz!</p>
+                        <button class="btn">Invite Friends Now</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="page__content">
-            <div class="s-increase">
-                <div class="container">
-                    <div class="s-increase__title">
-                        <div class="s-increase__title-inner">
-                            <div class="s-increase__title-top"> असली </div>
-                            <div class="s-increase__title-bottom">
-                                <span> बढ़त, लिंग के साइज़ में </span> 40%
-                                <span> तक बढ़त </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="s-increase__compare">
-                        <div class="compare">
-                            <div class="compare__items">
-                                <div class="compare__item">
-                                    <div class="compare-item compare-item_before">
-                                        <div
-                                            class="compare-item__information-wrapper compare-item__information-wrapper_before">
-                                            <div class="compare-item__information compare-item__information_before">
-                                                इस्तेमाल के बाद लंबाई-मोटाई दोनों बढ़ जाते हैं।
-                                                <span> Hammer of Thor </span> से न सिर्फ
-                                                <span>साइज़</span> बल्कि
-                                                <span>लंबाई भी बढ़ जाती है।</span>
-                                            </div>
-                                        </div>
-                                        <div class="compare-item__time-wrapper compare-item__time-wrapper_before">
-                                            <div class="compare-item__time compare-item__time_before">
-                                                <div class="compare-item__time-title"> खड़े होने की अधिकतम अवधि: </div>
-                                                <div class="compare-item__time-value"> 10-15 मिनट
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="compare-item__label compare-item__label_before"> पहले </div>
-                                        <div class="compare-item__length compare-item__length_before"> 14 सेमी </div>
-                                        <div class="compare-item__width compare-item__width_before"> 3 सेमी </div>
-                                    </div>
-                                </div>
-                                <div class="compare__item">
-                                    <div class="compare-item compare-item_after">
-                                        <div
-                                            class="compare-item__information-wrapper compare-item__information-wrapper_after">
-                                            <div class="compare-item__information compare-item__information_after"> लिंग
-                                                के उत्तक
-                                                <span>सह पाते हैं</span> ज़्यादा दबाव, जिससे बढ़ जाती है संभोग की अवधि
-                                                <span>2-3 गुना</span>
-                                            </div>
-                                        </div>
-                                        <div class="compare-item__time-wrapper compare-item__time-wrapper_after">
-                                            <div class="compare-item__time compare-item__time_after">
-                                                <div class="compare-item__time-title"> खड़े होने की अधिकतम अवधि: </div>
-                                                <div class="compare-item__time-value"> 40-75 मिनट
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="compare-item__label compare-item__label_after"> बाद में </div>
-                                        <div class="compare-item__length compare-item__length_after"> 18 सेमी </div>
-                                        <div class="compare-item__width compare-item__width_after"> 5.5 सेमी </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="s-experts">
-                <div class="container">
-                    <div class="s-experts__title-wrapper">
-                        <div class="s-experts__title">
-                            <!--div class="s-experts__title-top">  विशेषज्ञ की राय </div>
-<div class="s-experts__title-bottom">  इसके बारे में 
-              <span>   अभी   </span></div-->
-                            <!--div class="price__items-new" ><a style="color:red;" href="tel:+91-8929013389">Call Now : 8929013389</a>
-</div-->
-                        </div>
-                    </div>
-                    <div class="s-experts__items">
-                        <div class="experts">
-                            <div class="experts__item">
-                                <div class="experts__item-image-wrapper">
-                                    <img alt="" class="experts__item-image" src="../hammercapsule.co.in/img/expert1.png">
-                                    <div class="experts__item-title">
-                                        <div class="experts__item-name"> रवि पुरंदरे </div>
-                                        <div class="experts__item-post"> सेक्स-रोग विशेषज्ञ </div>
-                                    </div>
-                                </div>
-                                <div class="experts__item-text">
-                                    <div class="experts__item-text-shadow"></div>
-                                    <p> आधिकारिक आँकड़ों की जानकारी बहुत कम लोगों को ही होती है क्योंकि लिंग का ऑपरेशन
-                                        काफी संवेदनशील मुद्दा होता है और लोग इसके बारे में ज़्यादा बात-चीत पसंद नहीं
-                                        करते। भारत में हर साल 10,000 लोग अपने लिंग की लंबाई और मोटाई को ऑपरेशन के जरिए
-                                        बढ़वाते हैं। हम हमेशा से कहते आए हैं कि इससे स्वास्थ्य के लिए खतरा उत्पन्न हो
-                                        जाता है क्योंकि नर्व फाइबर (स्नायु तंत्र की नसें) लिंग की कैविटीज़ में गहरे अंदर
-                                        तक गए होते हैं। यदि इन कैविटीज़ में कोई नुक्सान हो जाए तो कई जोखिम उत्पन्न हो
-                                        जाते हैं, जैसे संवेदना चला जाना, खड़े होने में दर्द होना और नामर्दी। </p>
-                                    <p> ऑपरेशन की तुलना में <span>Hammer of Thor</span> के कोई गंभीर साइड-इफ़ेक्ट नहीं
-                                        हैं। यह शरीर को प्राकृतिक रूप से लिंग में वसा-उत्तकों को इखट्ठा करने के लिए
-                                        प्रेरित करती है।
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="experts__item">
-                                <div class="experts__item-image-wrapper">
-                                    <img alt="" class="experts__item-image" src="../hammercapsule.co.in/img/expert2.png">
-                                    <div class="experts__item-title">
-                                        <div class="experts__item-name"> मनोज त्रिवेदी </div>
-                                        <div class="experts__item-post"> सेक्स-रोग विशेषज्ञ </div>
-                                    </div>
-                                </div>
-                                <div class="experts__item-text">
-                                    <div class="experts__item-text-shadow"></div>
-                                    <p> योनि का सबसे संवेदनशील हिस्सा 2-3 सेमी की गहराई में स्थित होता है। आम तौर पर सब
-                                        सोचते हैं कि औरत के आनंद के लिए लिंग का लंबा होना ज़्यादा महत्वपूर्ण होता है,
-                                        लेकिन ऐसा नहीं है। आदमी के लिंग की मोटाई (साइज़) औरत के आनंद के लिए ज़्यादा जरूरी
-                                        होता है। आपका लिंग जितना मोटा और कड़ा होगा, आपकी पत्नी उतनी ही संतुष्ट हो पाएगी।
-                                    </p>
-                                    <p> यही नहीं, मोटा लिंग संभोग के दौरान औरत की क्लिटोरिस (भागांकुर) को उत्तेजित करके
-                                        एहसास कई गुना बढ़ा देता है जिससे ओरगाज़्म होने का असर कई गुना बढ़ जाता है। </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="s-reviews">
-                <div class="container">
-                    <div class="s-reviews__title-wrapper">
-                        <div class="s-reviews__title">
-                            <div class="s-reviews__title-top"> लोग पहले ही </div>
-                            <div class="s-reviews__title-bottom">
-                                <span> Hammer of Thor </span> ट्राय कर के देख चुके हैं!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="s-reviews__items">
-                        <div class="reviews">
-                            <div class="reviews__items">
-                                <div class="reviews__item">
-                                    <div class="reviews__item-image-wrapper">
-                                        <img alt="" class="reviews__item-image" src="../hammercapsule.co.in/img/reviewer-anonim.png">
-                                    </div>
-                                    <div class="reviews__item-text-wrapper">
-                                        <div class="reviews__item-title-wrapper">
-                                            <div class="reviews__item-name-wrapper">
-                                                <div class="reviews__item-name"> ज़हीन </div>
-                                                <div class="reviews__item-age"> 26 साल </div>
-                                            </div>
-                                            <div class="reviews__item-title">
-                                                <span> मैं अपनी बीवी को कभी पूरी संतुष्टि नहीं दे पाया </span>
-                                            </div>
-                                        </div>
-                                        <div class="reviews__item-text"> और वो भी इसको लेकर हमेशा नाराज़ रहती थी: उसने
-                                            मुझसे कई बार इसके लिए कुछ करने को कहा क्योंकि मेरा लिंग बहुत छोटा था! मैं
-                                            बहुत दुखी रहता था और मैंने कई तरह के इलाजों के बारे में सोचा। आखिर में मुझे
-                                            पसंद आई
-                                            <span>Hammer of Thor</span>.अब मुझे इसे लगाते 3 हफ्ते हो चुके हैं,
-                                            <span>और मेरा लिंग काफी बड़ा हो गया है</span> और मेरी बीवी को भी महसूस होने
-                                            लगा है। वो अब मुझसे कई बार सेक्स करने को कहती है।
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="reviews__item">
-                                    <div class="reviews__item-image-wrapper">
-                                        <!--img alt="" class="reviews__item-image" src="img/reviewer1.png"/>
-</div-->
-                                        <div class="reviews__item-text-wrapper">
-                                            <div class="reviews__item-title-wrapper">
-                                                <div class="reviews__item-name-wrapper">
-                                                    <!--div class="reviews__item-name">  राजन </div>
-<div class="reviews__item-age">  30 साल </div-->
-                                                </div>
-                                                <!--div class="reviews__item-title">
-<span>   फ़र्क दिखता है   </span>
-</div-->
-                                            </div>
-                                            <!--div class="reviews__item-text">  लिंग जितना बड़ा हो उतना अच्छा। मैं अपनी मर्दानगी खोना नहीं चाहता था और इसलिए ऑपरेशन का रिस्क नहीं लिया। मैंने ट्राय की  
-										<span>Hammer of Thor</span>   क्योंकि ये ज़्यादा सुरक्षित है और इससे मुझे बढ़िया फायदा भी हुआ,
-										<span>मेरा साइज़ 3 सेमी बढ़ गया।</span>   मेरी बीवी को साइज़ में बढ़त तुरंत महसूस हुई।  </div-->
-                                            <!--div class="price__items-new" ><a style="color:red;" href="tel:+91-8929013389">Call Now : 8929013389</a>
-</div-->
-                                        </div>
-                                    </div>
-                                    <div class="reviews__item">
-                                        <div class="reviews__item-image-wrapper">
-                                            <img alt="" class="reviews__item-image" src="../hammercapsule.co.in/img/reviewer-anonim.png">
-                                        </div>
-                                        <div class="reviews__item-text-wrapper">
-                                            <div class="reviews__item-title-wrapper">
-                                                <div class="reviews__item-name-wrapper">
-                                                    <div class="reviews__item-name"> जितेंद्र </div>
-                                                    <div class="reviews__item-age"> 36 साल </div>
-                                                </div>
-                                                <div class="reviews__item-title">
-                                                    <span> Hammer of Thor के बिना तो सेक्स में मजा ही नहीं आता था, सेक्स
-                                                        लाइफ बोरिंग हो गई थी </span>
-                                                </div>
-                                            </div>
-                                            <div class="reviews__item-text"> हमारी शादी को 8 साल हो चुके हैं और हम लोग
-                                                एक जैसे सेक्स करके बोर हो गए थे। डेलीवरी होने के बाद वैसे भी औरतों को
-                                                लिंग थोड़ा लंबा चाहिए होता है। फिर मैंने ट्राय की
-                                                <span>Hammer of Thor</span> ताकि सेक्स के दौरान और मजा और उन्माद बढ़ जाए।
-                                                मेरी बीवी का कहना है,
-                                                <span>कि उसने आखिरकार अब जाकर मेरे लिंग को महसूस किया है।</span> अब हम
-                                                हफ्ते में कई बार सेक्स करते हैं।
-                                                <span>मैंने एक और पैकेज का ऑर्डर कर दिया है।</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="reviews__item">
-                                        <div class="reviews__item-image-wrapper">
-                                            <img alt="" class="reviews__item-image" src="../hammercapsule.co.in/img/reviewer2.png">
-                                        </div>
-                                        <div class="reviews__item-text-wrapper">
-                                            <div class="reviews__item-title-wrapper">
-                                                <div class="reviews__item-name-wrapper">
-                                                    <div class="reviews__item-name"> हार्दिक </div>
-                                                    <div class="reviews__item-age"> 27 साल
-                                                    </div>
-                                                    <div class="reviews__item-title">
-                                                        <span> सबसे बेहतरीन प्रोडक्ट जो असर करता है
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="reviews__item-text"> मेरी शादी बीस साल की उम्र में हो गई थी
-                                                    और मेरी बीवी तब 25 की थी। मेरी पत्नी की ये दूसरी शादी थी इसलिए मुझे
-                                                    हमेशा डर लगा रहता था कि मैं उसे संतुष्ट नहीं कर पाऊँगा। मैंने
-                                                    इंटरनेट पर बहुत सर्च की कि अनुभवी आदमी इस परिस्थिती में क्या करते
-                                                    हैं, और मुझे यही समझ में आया कि
-                                                    <span>Hammer of Thor</span> लेना ही समझदारी होगी। इसलिए मैंने अपनी
-                                                    पत्नी से पूछा और उसने खुशी से हाँ कह दिया!
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <div class="container">
-                        <div class="footer__inner">
-                            <div class="footer__title">
-                                <div class="footer__title-top">
-                                    <div class="footer__title-top-left"> अपनी पार्टनर को दीजिए </div>
-                                    <div class="footer__title-top-right"> चरम सुख और उत्तेजना </div>
-                                </div>
-                                <div class="footer__title-bottom"> जिसकी वो हकदार है </div>
-                            </div>
-                            <div class="footer__content">
-                                <div class="footer__left">
-                                    <div class="footer__timer">
-                                        <div class="timer">
-                                            <div class="timer__title"> ऑफर खत्म होने में शेष समय </div>
-                                            <div class="timer__items js-timer">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="footer__package">
-                                        <div class="package">
-                                            <div class="package__sale-text">
-                                                <div class="sale"> अभी ऑर्डर करें
-                                                    <span> और पाएँ </span>
-                                                </div>
-                                            </div>
-                                            <div class="package__image-wrapper">
-                                                <div class="package__sale"> 50%
-                                                    <div class="package__text"> डिस्काउंट </div>
-                                                </div>
-                                                <div class="package__image"></div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer__form " id="order">
-
-                                    <form name="frmContact" id="frmContact" method="post" action="#"
-                                        enctype="multipart/form-data">
-                                        <div class="form__rows">
-                                            <div class="form__title"> ऑर्डर करें </div>
-
-                                            <div class="form__row">
-                                                <input class="input" name="userName" id="userName" placeholder="नाम"
-                                                    type="text" value="">
-                                            </div>
-                                            <div class="form__row">
-                                                <input class="input only only_number" name="subject" id="subject"
-                                                    placeholder="फ़ोन " type="text" value="">
-                                            </div>
-                                            <!--div class="form__row">
-<input class="input only only_number" name="content" id="content" placeholder="पिनकोड" type="text" value=""/>
-</div>
-<div class="form__row">
-<input class="input only only_number" name="userEmail" id="userEmail" placeholder="पूरा पता" type="text" value=""/>
-</div-->
-                                            <div class="form__row">
-                                                <select class="form-control" class="input only only_number"
-                                                    name="baddress" id="baddress" placeholder="price" type="text"
-                                                    value="">
-                                                    <option value="Pack Of 20 Capsule + Oil ">Pack Of 20 Capsule + Oil  </option>
-                                                    <option value="Pack Of 40 Capsule + Oil ">Pack Of 40 Capsule + Oil </option>
-                                                    <option value="Pack Of 60 Capsule + Oil ">Pack Of 60 Capsule  + Oil </option>
-                                                </select>
-                                            </div>
-
-                                            <input type="hidden" name="content" value="hammercapsule.co.in">
-
-
-
-
-                                        </div>
-                                        <div class="form__price">
-                                            <div class="price">
-                                                <div class="price__inner">
-                                                    <div class="price__items">
-                                                        <div class="price__items-old">
-                                                        </div>
-                                                        <div class="price__items-new"> Pack of 20 Capsules
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="price__button">
-                                                        <input class="button  button__text" type="submit" name="send"
-                                                            class="buttonIndex" value=" अभी ऑर्डर करें ">
-
-                                                        <div id="statusMessage">
-                                                                                                                    </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input name="time_zone" type="hidden" value="3">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <template id="js-timer-html">
-                    <div class="timer__item"> {h10}{h1}</div>
-                    <div class="timer__item"> {m10}{m1}</div>
-                    <div class="timer__item"> {s10}{s1}</div>
-                </template>
-
-
-                <div class="ac_footer"><span>&copy; 2020 Copyright. All rights reserved.</span><br>
-                    <a href="#" target="_blank">Privacy policy</a> | <a href="#">Report</a>
-                    <p>The results may vary depending on your individual features </p>
-
-                </div>
-                <!-- <a href="https://api.whatsapp.com/send?phone=+918929013389&text=Hello%21%20I%20am%20Dr.%20Rohit,%20How%20May%20I%20Help%20you?"
-                    class="float" target="_blank">
-                    <i class="fa fa-whatsapp my-float"></i>
-                </a> -->
-
-                <script src="../code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-                <script type="text/javascript">
-                    function scrollToForm() {
-                        document.querySelector('#frmContact').scrollIntoView({
-                            behavior: 'smooth'
-                        })
-                    }
-
-                    // function validateContactForm() {
-                    //     var valid = true;
-
-                    //     $(".info").html("");
-                    //     $(".input-field").css('border', '#e0dfdf 1px solid');
-                    //     var userName = $("#userName").val();
-                    //     var userEmail = $("#userEmail").val();
-                    //     var subject = $("#subject").val();
-                    //     var baddress = $("#baddress").val();
-                    //     var content = $("#content").val();
-
-                    //     if (userName == "") {
-                    //         $("#userName-info").html("Required.");
-                    //         $("#userName").css('border', '#e66262 1px solid');
-                    //         valid = false;
-                    //     }
-
-                    //     if (subject == "") {
-                    //         $("#subject-info").html("Required.");
-                    //         $("#subject").css('border', '#e66262 1px solid');
-                    //         valid = false;
-                    //     }
-
-                    //     if (baddress == "") {
-                    //         $("#baddress-info").html("Required.");
-                    //         $("#baddress").css('border', '#e66262 1px solid');
-                    //         valid = false;
-                    //     }
-
-                    //     return valid;
-                    // }
-                </script>
-            </div>
-        </div>
+        
+        <footer>
+            <p>QuizMaster © 2023 | Play fun games and earn real rewards! Minimum $5 withdrawal. Terms and conditions apply.</p>
+        </footer>
     </div>
+    
+    <script>
+        // Quiz questions and answers
+        const quizData = [
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                correct: 1
+            },
+            {
+                question: "What is the capital of Japan?",
+                options: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
+                correct: 2
+            },
+            {
+                question: "Which element has the chemical symbol 'O'?",
+                options: ["Gold", "Oxygen", "Osmium", "Oganesson"],
+                correct: 1
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+                correct: 2
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                correct: 3
+            }
+        ];
+
+        // DOM Elements
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startBtn = document.getElementById('start-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const questionNumber = document.getElementById('question-number');
+        const scoreElement = document.getElementById('score');
+        const finalScore = document.getElementById('final-score');
+        const coinsEarned = document.getElementById('coins-earned');
+
+        // Game state
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        // Initialize game
+        function initGame() {
+            currentQuestion = 0;
+            score = 0;
+            scoreElement.textContent = score;
+            showQuestion();
+        }
+
+        // Show current question
+        function showQuestion() {
+            const question = quizData[currentQuestion];
+            questionText.textContent = question.question;
+            questionNumber.textContent = currentQuestion + 1;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            question.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.classList.add('option-btn');
+                optionBtn.textContent = option;
+                optionBtn.addEventListener('click', () => selectOption(optionBtn, index));
+                optionsContainer.appendChild(optionBtn);
+            });
+            
+            // Reset selected option
+            selectedOption = null;
+            nextBtn.disabled = true;
+        }
+
+        // Select an option
+        function selectOption(optionBtn, index) {
+            // Remove selected class from all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            optionBtn.classList.add('selected');
+            selectedOption = index;
+            nextBtn.disabled = false;
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            if (selectedOption === null) return;
+            
+            // Check if answer is correct
+            const question = quizData[currentQuestion];
+            const optionButtons = document.querySelectorAll('.option-btn');
+            
+            if (selectedOption === question.correct) {
+                optionButtons[selectedOption].classList.add('correct');
+                score += 20;
+                scoreElement.textContent = score;
+            } else {
+                optionButtons[selectedOption].classList.add('incorrect');
+                optionButtons[question.correct].classList.add('correct');
+            }
+            
+            // Disable all options
+            optionButtons.forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestion++;
+                
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
+        }
+
+        // Show results screen
+        function showResults() {
+            quizScreen.classList.remove('active-screen');
+            resultScreen.classList.add('active-screen');
+            
+            finalScore.textContent = score;
+            // Calculate coins earned (1 point = 1 coin)
+            coinsEarned.textContent = score;
+        }
+
+        // Event Listeners
+        startBtn.addEventListener('click', () => {
+            welcomeScreen.classList.remove('active-screen');
+            quizScreen.classList.add('active-screen');
+            initGame();
+        });
+
+        nextBtn.addEventListener('click', nextQuestion);
+
+        // Add restart functionality
+        document.querySelectorAll('.btn').forEach(btn => {
+            if (btn.textContent === "Play Another Quiz") {
+                btn.addEventListener('click', () => {
+                    resultScreen.classList.remove('active-screen');
+                    quizScreen.classList.add('active-screen');
+                    initGame();
+                });
+            }
+        });
+    </script>
 </body>
-
-
-
-<!-- Mirrored from cashaprime24x7.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 07 Feb 2025 17:25:32 GMT -->
-</html>  
+</html>
