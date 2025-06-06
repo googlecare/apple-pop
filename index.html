@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         // Optional JavaScript redirect (in case meta refresh is blocked)
         setTimeout(function() {
-            window.location.href = "#";
-        }, 20000); // 40000 milliseconds = 40 seconds
+            window.location.href = "www.google.com";
+        }, 20000); // 60000 milliseconds = 60 seconds
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CashQuiz - Play Games & Earn Money</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -463,6 +463,15 @@
             opacity: 0.8;
         }
         
+        .withdrawal-min {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin: 15px 0;
+            border: 1px solid var(--primary);
+        }
+        
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -529,6 +538,65 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        
+        .sms-section {
+            background: rgba(42, 157, 143, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .sms-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .sms-container {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: left;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .sms-message {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--light);
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .sms-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+        
+        .sms-btn {
+            background: rgba(233, 196, 106, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .sms-btn:hover {
+            background: rgba(233, 196, 106, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -554,7 +622,11 @@
             <div id="welcome-screen" class="game-screen active-screen">
                 <div class="welcome-screen">
                     <h2>Turn Knowledge Into Cash!</h2>
-                    <p>Play our daily quizzes and earn real money for every correct answer. Cash out anytime via PayPal, Paytm, or bank transfer!</p>
+                    <p>Play our daily quizzes and earn real money for every correct answer. Cash out anytime via PayPal!</p>
+                    
+                    <div class="withdrawal-min">
+                        <i class="fas fa-info-circle"></i> Minimum withdrawal: $5 via PayPal
+                    </div>
                     
                     <div class="features">
                         <div class="feature">
@@ -580,7 +652,7 @@
                     
                     <div class="earn-section">
                         <h3>How to Earn Money</h3>
-                        <p>Answer quiz questions correctly to earn coins. 100 coins = $1. Cash out anytime with no fees!</p>
+                        <p>Answer quiz questions correctly to earn coins. 100 coins = $1. Cash out anytime via PayPal with a $5 minimum!</p>
                         
                         <div class="earn-options">
                             <div class="earn-option">
@@ -599,6 +671,41 @@
                                 <p>Get 200 coins per referral + 30% of their earnings</p>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- SMS Promotion Section -->
+                    <div class="sms-section">
+                        <h3>Get Started with SMS</h3>
+                        <p>Send these SMS to invite friends and earn more:</p>
+                        
+                        <div class="sms-container">
+                            <div class="sms-message">
+                                Play CashQuiz & earn REAL money! Answer questions → Win cash → Withdraw $5+ via PayPal. Start now: cashquiz.link
+                            </div>
+                            <div class="sms-stats">
+                                <span>Length: 112 chars</span>
+                                <span>FREE SMS</span>
+                            </div>
+                            
+                            <div class="sms-message">
+                                Earn $ playing fun quizzes! Answer questions → Win cash → Withdraw $5+ via PayPal. Free to play: cashquiz.link
+                            </div>
+                            <div class="sms-stats">
+                                <span>Length: 102 chars</span>
+                                <span>FREE SMS</span>
+                            </div>
+                            
+                            <div class="sms-message">
+                                Turn knowledge into cash! Play quizzes → Earn money → Withdraw $5+ via PayPal. Start: cashquiz.link
+                            </div>
+                            <div class="sms-stats">
+                                <span>Length: 95 chars</span>
+                                <span>FREE SMS</span>
+                            </div>
+                        </div>
+                        
+                        <button class="sms-btn"><i class="fas fa-share-alt"></i> Share with Friends</button>
+                        <button class="sms-btn"><i class="fas fa-copy"></i> Copy All SMS</button>
                     </div>
                 </div>
             </div>
@@ -645,18 +752,17 @@
                     
                     <div class="earn-section">
                         <h3>Withdraw Your Earnings</h3>
-                        <p>You've reached the $5 minimum withdrawal! Choose your payment method:</p>
+                        <p>You've reached the $5 minimum withdrawal! Withdraw via PayPal:</p>
                         
                         <div class="earn-options">
-                            <div class="earn-option">
+                            <div class="earn-option" style="margin: 0 auto; max-width: 400px;">
                                 <i class="fab fa-paypal"></i>
-                                <h4>PayPal</h4>
-                                <p>Instant transfer</p>
-                                <button class="btn btn-earn" style="margin-top: 15px;">Withdraw $5.30</button>
-                            </div>
-                            <div class="earn-option">
-                                <i class="fas fa-mobile-alt"></i>
-                               
+                                <h4>PayPal Withdrawal</h4>
+                                <p>Instant transfer to your PayPal account</p>
+                                <div class="withdrawal-min" style="margin: 15px auto;">
+                                    <i class="fas fa-check-circle"></i> Minimum $5 withdrawal
+                                </div>
+                                <button class="btn btn-earn" style="margin-top: 15px;">Withdraw $5.30 via PayPal</button>
                             </div>
                         </div>
                     </div>
@@ -687,7 +793,7 @@
                 <a href="#">Support</a>
                 <a href="#">Terms & Conditions</a>
             </div>
-            <p>CashQuiz © 2023 | Play fun quizzes and earn real money! Minimum $1 withdrawal. Terms and conditions apply.</p>
+            <p>CashQuiz © 2023 | Play fun quizzes and earn real money! Minimum $5 withdrawal via PayPal. Terms and conditions apply.</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">1000+ users have earned over $25,000 this month!</p>
         </footer>
     </div>
